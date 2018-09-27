@@ -126,11 +126,15 @@ type ClientApi struct {
 	teamId    string
 }
 
-func NewClient(baseUrl string, teamId string, token string) ClientApi {
+func NewClient(teamId string, token string, baseApiUrl string) ClientApi {
+	if baseApiUrl == "" {
+		baseApiUrl = BaseApiUrl
+	}
+
 	return ClientApi{
 		c:         &http.Client{},
-		endpoints: createEndpoints(baseUrl, teamId),
-		baseUrl:   baseUrl,
+		endpoints: createEndpoints(baseApiUrl, teamId),
+		baseUrl:   baseApiUrl,
 		teamId:    teamId,
 		token:     token,
 	}
