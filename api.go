@@ -2,40 +2,33 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/pabiadzinski/assistentby-api/models"
-	"reflect"
 )
 
 const BaseApiUrl = "https://app.assistent.by/api/v1"
 
 type ApiAssistent struct {
-	c *ClientApi
+	c ClientApi
 }
 
 func (api *ApiAssistent) getOperations(params string) interface{} {
-	response := &models.ApiResponse{Data: []models.Operation{}}
+	response := &ApiResponse{Data: []Operation{}}
 
-	url := api.c.baseUrl + "/operations?team_id=" + api.c.teamId
-
-	req, err := api.c.getRequest(url, params)
+	req, err := api.c.getRequest(api.c.getEndpoint(getOperations), params)
 
 	failOnError(err, "get operations")
 
 	json.Unmarshal(req, response)
 
-	fmt.Println(reflect.TypeOf(response))
+	//fmt.Println(reflect.TypeOf(response))
 	//fmt.Printf("%+v\n", response)
 
 	return response
 }
 
-func (api *ApiAssistent) getUser(params string) interface{} {
-	response := &models.Profile{}
+func (api *ApiAssistent) getProfile(params string) interface{} {
+	response := &Profile{}
 
-	url := api.c.baseUrl + "/user"
-
-	req, err := api.c.getRequest(url, params)
+	req, err := api.c.getRequest(api.c.getEndpoint(getProfile), params)
 
 	failOnError(err, "get user")
 
@@ -44,12 +37,10 @@ func (api *ApiAssistent) getUser(params string) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) addOperation(form models.Operation) interface{} {
-	response := &models.ApiResponse{Data: models.Operation{}}
+func (api *ApiAssistent) addOperation(form Operation) interface{} {
+	response := &ApiResponse{}
 
-	url := api.c.baseUrl + "/operations"
-
-	req, err := api.c.postRequest(url, form)
+	req, err := api.c.postRequest(api.c.getEndpoint(storeOperation), form)
 
 	failOnError(err, "create operation")
 

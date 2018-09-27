@@ -1,4 +1,4 @@
-package models
+package main
 
 const (
 	OperationIncomeID = iota + 1
