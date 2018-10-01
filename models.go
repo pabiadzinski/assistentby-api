@@ -1,4 +1,4 @@
-package main
+package assistentby
 
 const (
 	OperationIncomeID = iota + 1
