@@ -74,6 +74,19 @@ type Operation struct {
 	UpdatedAt       string  `json:"updated_at,omitempty"`
 }
 
+type BankAccount struct {
+	Id                 string  `json:"id,omitempty"`
+	TeamId             string  `json:"team_id,omitempty"`
+	BankId             int     `json:"bank_id,omitempty"`
+	Label              int     `json:"label,omitempty"`
+	Balance            float64 `json:"balance,omitempty"`
+	BalanceDate        string  `json:"balance_date,omitempty"`
+	CurrencyId         int     `json:"currency_id,omitempty"`
+	Number             string  `json:"number,omitempty"`
+	OpeningBalance     float64 `json:"opening_balance,omitempty"`
+	OpeningBalanceDate string  `json:"opening_balance_date,omitempty"`
+}
+
 type OperationType struct {
 	Id   int    `json:"id"`
 	Name string `json:"name"`
@@ -89,8 +102,7 @@ type Bank struct {
 }
 
 type Okved struct {
-	Id int `json:"id"`
-
+	Id    int    `json:"id"`
 	Code  string `json:"code"`
 	Title string `json:""`
 }

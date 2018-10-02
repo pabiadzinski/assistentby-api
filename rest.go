@@ -14,10 +14,10 @@ type method string
 const (
 	getProfile method = "user"
 
-	getBankAccounts    method = "bank-accounts?team_id="
-	storeBankAccounts  method = "bank-accounts"
-	updateBankAccounts method = "bank-accounts/{id}"
-	deleteBankAccounts method = "bank-accounts/{id}"
+	getBankAccounts   method = "bank-accounts?team_id="
+	storeBankAccount  method = "bank-accounts"
+	updateBankAccount method = "bank-accounts/{id}"
+	deleteBankAccount method = "bank-accounts/{id}"
 
 	getBusinesses  method = "businesses?team_id="
 	storeBusiness  method = "businesses"
@@ -147,6 +147,10 @@ func (c *ClientApi) validateResponse(res *http.Response) ([]byte, error) {
 		return nil, errors.New("response is not json")
 	}
 
+	if res.StatusCode > 201 {
+		return nil, errors.New("validation response")
+	}
+
 	body, err := ioutil.ReadAll(res.Body)
 
 	if err != nil {
@@ -170,35 +174,36 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list := make(map[method]string)
 
 	list[getOperations] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getBankAccounts] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getBusinesses] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getContractors] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getCurrencies] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getDocuments] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getDocumentStatues] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getDocumentTypes] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getLatestOperation] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getLatestPayment] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getLatestService] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getOkvedCategories] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getOkveds] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getOperationFlows] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getOperationTypes] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
+	list[getBankAccounts] = fmt.Sprint(baseURI, "/", string(getBankAccounts), string(teamId))
+	list[getBusinesses] = fmt.Sprint(baseURI, "/", string(getBusinesses), string(teamId))
+	list[getContractors] = fmt.Sprint(baseURI, "/", string(getContractors), string(teamId))
+	list[getCurrencies] = fmt.Sprint(baseURI, "/", string(getCurrencies), string(teamId))
+	list[getDocuments] = fmt.Sprint(baseURI, "/", string(getDocuments), string(teamId))
+	list[getDocumentStatues] = fmt.Sprint(baseURI, "/", string(getDocumentStatues), string(teamId))
+	list[getDocumentTypes] = fmt.Sprint(baseURI, "/", string(getDocumentTypes), string(teamId))
+	list[getLatestOperation] = fmt.Sprint(baseURI, "/", string(getLatestOperation), string(teamId))
+	list[getLatestPayment] = fmt.Sprint(baseURI, "/", string(getLatestPayment), string(teamId))
+	list[getLatestService] = fmt.Sprint(baseURI, "/", string(getLatestService), string(teamId))
+	list[getOkvedCategories] = fmt.Sprint(baseURI, "/", string(getOkvedCategories), string(teamId))
+	list[getOkveds] = fmt.Sprint(baseURI, "/", string(getOkveds), string(teamId))
+	list[getOperationFlows] = fmt.Sprint(baseURI, "/", string(getOperationFlows), string(teamId))
+	list[getOperationTypes] = fmt.Sprint(baseURI, "/", string(getOperationTypes), string(teamId))
 	list[getProfile] = fmt.Sprint(baseURI, "/", string(getProfile))
-	list[getPayments] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getPaymentStatuses] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getServiceCategories] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getServices] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getLatestService] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getTaxes] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getTeams] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getTicketComments] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getTicketDepartments] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getTickets] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getUnits] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
-	list[getVatRates] = fmt.Sprint(baseURI, "/", string(getOperations), string(teamId))
+	list[getPayments] = fmt.Sprint(baseURI, "/", string(getPayments), string(teamId))
+	list[getPaymentStatuses] = fmt.Sprint(baseURI, "/", string(getPaymentStatuses), string(teamId))
+	list[getServiceCategories] = fmt.Sprint(baseURI, "/", string(getServiceCategories), string(teamId))
+	list[getServices] = fmt.Sprint(baseURI, "/", string(getServices), string(teamId))
+	list[getLatestService] = fmt.Sprint(baseURI, "/", string(getLatestService), string(teamId))
+	list[getTaxes] = fmt.Sprint(baseURI, "/", string(getTaxes), string(teamId))
+	list[getTeams] = fmt.Sprint(baseURI, "/", string(getTeams), string(teamId))
+	list[getTicketComments] = fmt.Sprint(baseURI, "/", string(getTicketComments), string(teamId))
+	list[getTicketDepartments] = fmt.Sprint(baseURI, "/", string(getTicketDepartments), string(teamId))
+	list[getTickets] = fmt.Sprint(baseURI, "/", string(getTickets), string(teamId))
+	list[getUnits] = fmt.Sprint(baseURI, "/", string(getUnits), string(teamId))
+	list[getVatRates] = fmt.Sprint(baseURI, "/", string(getVatRates), string(teamId))
 
 	list[storeOperation] = fmt.Sprint(baseURI, "/", string(storeOperation))
+	list[storeBankAccount] = fmt.Sprint(baseURI, "/", string(storeBankAccount))
 
 	return list
 }

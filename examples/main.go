@@ -1,7 +1,3 @@
-# assistentby-api
-
-Example
-
 package main
 
 import (

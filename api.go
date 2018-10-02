@@ -7,13 +7,13 @@ import (
 const BaseApiUrl = "https://app.assistent.by/api/v1"
 
 type ApiAssistent struct {
-	c ClientApi
+	C ClientApi
 }
 
-func (api *ApiAssistent) getOperations(params string) interface{} {
+func (api *ApiAssistent) GetOperations(params string) interface{} {
 	response := &ApiResponse{Data: []Operation{}}
 
-	req, err := api.c.getRequest(api.c.getEndpoint(getOperations), params)
+	req, err := api.C.getRequest(api.C.getEndpoint(getOperations), params)
 
 	failOnError(err, "get operations")
 
@@ -25,10 +25,10 @@ func (api *ApiAssistent) getOperations(params string) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) getProfile(params string) interface{} {
+func (api *ApiAssistent) GetProfile(params string) interface{} {
 	response := &Profile{}
 
-	req, err := api.c.getRequest(api.c.getEndpoint(getProfile), params)
+	req, err := api.C.getRequest(api.C.getEndpoint(getProfile), params)
 
 	failOnError(err, "get user")
 
@@ -37,12 +37,24 @@ func (api *ApiAssistent) getProfile(params string) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) addOperation(form Operation) interface{} {
-	response := &ApiResponse{}
+func (api *ApiAssistent) StoreOperation(form Operation) interface{} {
+	response := &ApiResponse{Data: Operation{}}
 
-	req, err := api.c.postRequest(api.c.getEndpoint(storeOperation), form)
+	req, err := api.C.postRequest(api.C.getEndpoint(storeOperation), form)
 
 	failOnError(err, "create operation")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
+func (api *ApiAssistent) StoreBankAccount(form BankAccount) interface{} {
+	response := &ApiResponse{Data: BankAccount{}}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
+
+	failOnError(err, "create bank account")
 
 	json.Unmarshal(req, response)
 
