@@ -60,3 +60,27 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) interface{} {
 
 	return response
 }
+
+func (api *ApiAssistent) GetCurrencies(params string) interface{} {
+	response := &ApiResponse{Data: []Currency{}}
+
+	req, err := api.C.getRequest(api.C.getEndpoint(getCurrencies), params)
+
+	failOnError(err, "get currencies")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
+func (api *ApiAssistent) GetBanks(params string) interface{} {
+	response := &ApiResponse{Data: []Bank{}}
+
+	req, err := api.C.getRequest(api.C.getEndpoint(getBanks), params)
+
+	failOnError(err, "get banks")
+
+	json.Unmarshal(req, response)
+
+	return response
+}

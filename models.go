@@ -78,7 +78,7 @@ type BankAccount struct {
 	Id                 string  `json:"id,omitempty"`
 	TeamId             string  `json:"team_id,omitempty"`
 	BankId             int     `json:"bank_id,omitempty"`
-	Label              string     `json:"label,omitempty"`
+	Label              string  `json:"label,omitempty"`
 	Balance            float64 `json:"balance,omitempty"`
 	BalanceDate        string  `json:"balance_date,omitempty"`
 	CurrencyId         int     `json:"currency_id,omitempty"`
@@ -105,4 +105,10 @@ type Okved struct {
 	Id    int    `json:"id"`
 	Code  string `json:"code"`
 	Title string `json:"title"`
+}
+
+type Currency struct {
+	Id       int    `json:"id"`
+	Code     string `json:"code"`
+	CodeName string `json:"code_name"`
 }

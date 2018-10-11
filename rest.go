@@ -30,6 +30,7 @@ const (
 	deleteContractor method = "contractors/{id}"
 
 	getCurrencies method = "currencies"
+	getBanks      method = "banks"
 
 	getDocuments     method = "documents?team_id="
 	getDocumentQueue method = "documents/{id}/queue"
@@ -148,7 +149,7 @@ func (c *ClientApi) validateResponse(res *http.Response) ([]byte, error) {
 	}
 
 	if res.StatusCode > 201 {
-		return nil, errors.New("validation response")
+		return nil, errors.New("validation response error")
 	}
 
 	body, err := ioutil.ReadAll(res.Body)
@@ -177,7 +178,8 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[getBankAccounts] = fmt.Sprint(baseURI, "/", string(getBankAccounts), string(teamId))
 	list[getBusinesses] = fmt.Sprint(baseURI, "/", string(getBusinesses), string(teamId))
 	list[getContractors] = fmt.Sprint(baseURI, "/", string(getContractors), string(teamId))
-	list[getCurrencies] = fmt.Sprint(baseURI, "/", string(getCurrencies), string(teamId))
+	list[getCurrencies] = fmt.Sprint(baseURI, "/", string(getCurrencies))
+	list[getBanks] = fmt.Sprint(baseURI, "/", string(getBanks))
 	list[getDocuments] = fmt.Sprint(baseURI, "/", string(getDocuments), string(teamId))
 	list[getDocumentStatues] = fmt.Sprint(baseURI, "/", string(getDocumentStatues), string(teamId))
 	list[getDocumentTypes] = fmt.Sprint(baseURI, "/", string(getDocumentTypes), string(teamId))
@@ -231,7 +233,7 @@ func (c *ClientApi) postRequest(url string, postData interface{}) ([]byte, error
 }
 
 func (c *ClientApi) getRequest(url string, params string) ([]byte, error) {
-	req, err := http.NewRequest("GET", url, nil)
+	req, err := http.NewRequest("GET", url+"?"+params, nil)
 
 	req.Header.Set("Content-type", "application/json")
 	req.Header.Set("Authorization", c.token)
