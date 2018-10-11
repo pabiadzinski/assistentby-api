@@ -90,9 +90,9 @@ type BankAccount struct {
 type Contractor struct {
 	Id            string `json:"id,omitempty"`
 	TeamId        string `json:"team_id,omitempty"`
-	Name          int    `json:"name,omitempty"`
-	ShortName     int    `json:"short_name,omitempty"`
-	UIN           int    `json:"uin,omitempty"`
+	Name          string `json:"name,omitempty"`
+	ShortName     string `json:"short_name,omitempty"`
+	UIN           string `json:"uin,omitempty"`
 	IsLegalPerson int    `json:"is_legal_person,omitempty"`
 }
 

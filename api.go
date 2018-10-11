@@ -64,7 +64,7 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) interface{} {
 func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
 	response := &ApiResponse{Data: Contractor{}}
 
-	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
+	req, err := api.C.postRequest(api.C.getEndpoint(storeContractor), form)
 
 	failOnError(err, "create contractor")
 
