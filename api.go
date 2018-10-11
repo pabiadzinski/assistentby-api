@@ -61,6 +61,18 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) interface{} {
 	return response
 }
 
+func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
+	response := &ApiResponse{Data: Contractor{}}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
+
+	failOnError(err, "create contractor")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
 func (api *ApiAssistent) GetCurrencies(params string) interface{} {
 	response := &ApiResponse{Data: []Currency{}}
 
