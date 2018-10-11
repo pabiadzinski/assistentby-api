@@ -39,4 +39,8 @@ func main() {
 
 	respOperations := api.StoreOperation(formOperation)
 	fmt.Printf("%+v\n", respOperations)
+
+	bankParams := "code=AKBBBY21802"
+	responseBanks := api.GetBanks(bankParams)
+	fmt.Printf("%+v\n", responseBanks)
 }
