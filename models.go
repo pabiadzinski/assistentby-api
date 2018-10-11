@@ -87,6 +87,14 @@ type BankAccount struct {
 	OpeningBalanceDate string  `json:"opening_balance_date,omitempty"`
 }
 
+type Contractor struct {
+	Id        string `json:"id,omitempty"`
+	TeamId    string `json:"team_id,omitempty"`
+	Name      int    `json:"name,omitempty"`
+	ShortName int    `json:"short_name,omitempty"`
+	UIN       int    `json:"uin,omitempty"`
+}
+
 type OperationType struct {
 	Id   int    `json:"id"`
 	Name string `json:"name"`
