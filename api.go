@@ -74,7 +74,7 @@ func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
 }
 
 func (api *ApiAssistent) GetCurrencies(params string) interface{} {
-	response := &ApiResponse{Data: []Currency{}}
+	response := &CurrencyResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getCurrencies), params)
 
@@ -86,7 +86,7 @@ func (api *ApiAssistent) GetCurrencies(params string) interface{} {
 }
 
 func (api *ApiAssistent) GetBanks(params string) interface{} {
-	response := &ApiResponse{Data: []Bank{}}
+	response := &BankResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getBanks), params)
 

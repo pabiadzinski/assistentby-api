@@ -43,6 +43,16 @@ type ApiErrorResponse struct {
 	Error `json:"error"`
 }
 
+type BankResponse struct {
+	Data         []Bank `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
+type CurrencyResponse struct {
+	Data         []Currency `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
 type Profile struct {
 	Id         int         `json:"id"`
 	Name       string      `json:"name"`
