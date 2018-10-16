@@ -41,4 +41,4 @@
 
 	respOperations := api.StoreOperation(formOperation)
 	fmt.Printf("%+v\n", respOperations)
-}
+	}
