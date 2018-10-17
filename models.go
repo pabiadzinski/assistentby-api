@@ -87,6 +87,9 @@ type Operation struct {
 	CreatedBy       string  `json:"created_by,omitempty"`
 	CreatedAt       string  `json:"created_at,omitempty"`
 	UpdatedAt       string  `json:"updated_at,omitempty"`
+
+	BankAccountNumber string `json:"bank_account_number"`
+	CurrencyCode      int `json:"currency_code"`
 }
 
 type BankAccount struct {
@@ -100,6 +103,9 @@ type BankAccount struct {
 	Number             string  `json:"number,omitempty"`
 	OpeningBalance     float64 `json:"opening_balance,omitempty"`
 	OpeningBalanceDate string  `json:"opening_balance_date,omitempty"`
+
+	BankCode     string `json:"bank_code"`
+	CurrencyCode int `json:"currency_code"`
 }
 
 type Contractor struct {
