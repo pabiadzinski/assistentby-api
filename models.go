@@ -53,6 +53,11 @@ type CurrencyResponse struct {
 	MetaResponse `json:"meta"`
 }
 
+type BankAccountResponse struct {
+	Data         BankAccount `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
 type Profile struct {
 	Id         int         `json:"id"`
 	Name       string      `json:"name"`

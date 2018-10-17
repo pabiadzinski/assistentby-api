@@ -49,12 +49,24 @@ func (api *ApiAssistent) StoreOperation(form Operation) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) StoreBankAccount(form BankAccount) interface{} {
-	response := &ApiResponse{Data: BankAccount{}}
+func (api *ApiAssistent) StoreBankAccount(form BankAccount) *BankAccountResponse {
+	response := &BankAccountResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
 
 	failOnError(err, "create bank account")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
+func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) *BankAccountResponse {
+	response := &BankAccountResponse{}
+
+	req, err := api.C.postRequest(replaceId(api.C.getEndpoint(updateBankAccount), id), form)
+
+	failOnError(err, "update bank account")
 
 	json.Unmarshal(req, response)
 
@@ -73,7 +85,7 @@ func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) GetCurrencies(params string) interface{} {
+func (api *ApiAssistent) GetCurrencies(params string) *CurrencyResponse {
 	response := &CurrencyResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getCurrencies), params)
@@ -85,7 +97,7 @@ func (api *ApiAssistent) GetCurrencies(params string) interface{} {
 	return response
 }
 
-func (api *ApiAssistent) GetBanks(params string) interface{} {
+func (api *ApiAssistent) GetBanks(params string) *BankResponse {
 	response := &BankResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getBanks), params)
