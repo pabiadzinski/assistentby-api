@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -149,6 +150,10 @@ func (c *ClientApi) validateResponse(res *http.Response) ([]byte, error) {
 	}
 
 	if res.StatusCode > 201 {
+		body, _ := ioutil.ReadAll(res.Body)
+
+		log.Println(string(body))
+
 		return nil, errors.New("validation response error")
 	}
 
@@ -205,6 +210,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[getVatRates] = fmt.Sprint(baseURI, "/", string(getVatRates), string(teamId))
 
 	list[storeOperation] = fmt.Sprint(baseURI, "/", string(storeOperation))
+	list[updateOperation] = fmt.Sprint(baseURI, "/", string(updateOperation))
 	list[storeBankAccount] = fmt.Sprint(baseURI, "/", string(storeBankAccount))
 	list[updateBankAccount] = fmt.Sprint(baseURI, "/", string(updateBankAccount))
 	list[storeContractor] = fmt.Sprint(baseURI, "/", string(storeContractor))
@@ -222,6 +228,36 @@ func (c *ClientApi) postRequest(url string, postData interface{}) ([]byte, error
 	req.Header.Set("Authorization", c.token)
 
 	response, err := c.c.Do(req)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer response.Body.Close()
+
+	res, err := c.validateResponse(response)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return res, err
+}
+
+func (c *ClientApi) putRequest(url string, putData interface{}) ([]byte, error) {
+	j, _ := json.Marshal(putData)
+	form := bytes.NewBuffer(j)
+	log.Print(url, form)
+	req, err := http.NewRequest("PUT", url, form)
+
+	req.Header.Set("Content-type", "application/json")
+	req.Header.Set("Authorization", c.token)
+
+	response, err := c.c.Do(req)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	defer response.Body.Close()
 
@@ -241,6 +277,10 @@ func (c *ClientApi) getRequest(url string, params string) ([]byte, error) {
 	req.Header.Set("Authorization", c.token)
 
 	response, err := c.c.Do(req)
+
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	defer response.Body.Close()
 

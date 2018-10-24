@@ -12,5 +12,5 @@ func failOnError(err error, msg string) {
 }
 
 func replaceId(url string, id string) string {
-	return strings.Replace(url, ":id", id, -1)
+	return strings.Replace(url, "{id}", id, -1)
 }

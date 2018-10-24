@@ -49,6 +49,18 @@ func (api *ApiAssistent) StoreOperation(form Operation) interface{} {
 	return response
 }
 
+func (api *ApiAssistent) UpdateOperation(form Operation, id string) interface{} {
+	response := &ApiResponse{Data: Operation{}}
+
+	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateOperation), id), form)
+
+	failOnError(err, "update operation")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
 func (api *ApiAssistent) StoreBankAccount(form BankAccount) *BankAccountResponse {
 	response := &BankAccountResponse{}
 
@@ -64,7 +76,7 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) *BankAccountResponse
 func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) *BankAccountResponse {
 	response := &BankAccountResponse{}
 
-	req, err := api.C.postRequest(replaceId(api.C.getEndpoint(updateBankAccount), id), form)
+	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateBankAccount), id), form)
 
 	failOnError(err, "update bank account")
 
