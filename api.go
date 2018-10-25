@@ -120,3 +120,16 @@ func (api *ApiAssistent) GetBanks(params string) *BankResponse {
 
 	return response
 }
+
+func (api *ApiAssistent) GetContractorDataByInn(inn string) *UzContractorResponse {
+	response := &UzContractorResponse{}
+
+	url := "http://services.officebank.uz/api/officebank/contractors/" + inn
+
+	req, err := api.C.getRequest(url, "")
+
+	failOnError(err, "uz contractor")
+	json.Unmarshal(req, response)
+
+	return response
+}

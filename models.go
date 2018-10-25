@@ -58,6 +58,10 @@ type BankAccountResponse struct {
 	MetaResponse `json:"meta"`
 }
 
+type UzContractorResponse struct {
+	Data UzContractor `json:"data"`
+}
+
 type Profile struct {
 	Id         int         `json:"id"`
 	Name       string      `json:"name"`
@@ -141,4 +145,13 @@ type Currency struct {
 	Id       int    `json:"id"`
 	Code     string `json:"code"`
 	CodeName string `json:"code_name"`
+}
+
+type UzContractor struct {
+	FullName           string `json:"full_name"`
+	ShortName          string `json:"short_name"`
+	RegistrationNumber string `json:"registration_number"`
+	AgreementDate      string `json:"agreement_date"`
+	UIN                string `json:"uin"`
+	JuridicalAddress   string `json:"juridical_address"`
 }
