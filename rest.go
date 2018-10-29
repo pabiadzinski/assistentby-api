@@ -114,6 +114,9 @@ const (
 
 	getRoles     method = "roles"
 	getConstants method = "constants"
+
+	updateTransactionStatus  method = "transactions/status"
+	updateBankAccountBalance method = "bank-accounts/balance"
 )
 
 type Doer interface {
@@ -214,6 +217,8 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[storeBankAccount] = fmt.Sprint(baseURI, "/", string(storeBankAccount))
 	list[updateBankAccount] = fmt.Sprint(baseURI, "/", string(updateBankAccount))
 	list[storeContractor] = fmt.Sprint(baseURI, "/", string(storeContractor))
+	list[updateTransactionStatus] = fmt.Sprint(baseURI, "/", string(updateTransactionStatus))
+	list[updateBankAccountBalance] = fmt.Sprint(baseURI, "/", string(updateBankAccountBalance))
 
 	return list
 }

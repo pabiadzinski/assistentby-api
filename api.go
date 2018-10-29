@@ -2,6 +2,7 @@ package assistentby
 
 import (
 	"encoding/json"
+	_ "fmt"
 )
 
 const BaseApiUrl = "https://app.assistent.by/api/v1"
@@ -129,6 +130,30 @@ func (api *ApiAssistent) GetContractorDataByInn(inn string) *UzContractorRespons
 	req, err := api.C.getRequest(url, "")
 
 	failOnError(err, "uz contractor")
+	json.Unmarshal(req, response)
+
+	return response
+}
+
+func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) *PaymentStatusResponse {
+	response := &PaymentStatusResponse{}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(updateTransactionStatus), form)
+
+	failOnError(err, "update transaction status")
+
+	json.Unmarshal(req, response)
+
+	return response
+}
+
+func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) *AccountBalanceResponse {
+	response := &AccountBalanceResponse{}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(updateBankAccountBalance), form)
+
+	failOnError(err, "update account balance")
+
 	json.Unmarshal(req, response)
 
 	return response

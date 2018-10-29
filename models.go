@@ -58,6 +58,16 @@ type BankAccountResponse struct {
 	MetaResponse `json:"meta"`
 }
 
+type PaymentStatusResponse struct {
+	Data         TransactionStatus `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
+type AccountBalanceResponse struct {
+	Data         BankAccount `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
 type UzContractorResponse struct {
 	Data UzContractor `json:"data"`
 }
@@ -86,14 +96,14 @@ type Operation struct {
 	Description     string  `json:"description,omitempty"`
 	OperationTypeId int     `json:"operation_type_id"`
 	OperationFlowId int     `json:"operation_flow_id,omitempty"`
-	CurrencyId      int     `json:"currency_id"`
+	CurrencyCode    int     `json:"currency_code"` //usz sum
+	CurrencyId      string  `json:"currency_id"`
 	TransactionId   string  `json:"transaction_id,omitempty"`
-	CreatedBy       string  `json:"created_by,omitempty"`
-	CreatedAt       string  `json:"created_at,omitempty"`
-	UpdatedAt       string  `json:"updated_at,omitempty"`
+	CreatedBy       *string `json:"created_by,omitempty"`
+	CreatedAt       *string `json:"created_at,omitempty"`
+	UpdatedAt       *string `json:"updated_at,omitempty"`
 
 	BankAccountNumber string `json:"bank_account_number,omitempty"`
-	CurrencyCode      int    `json:"currency_code,omitempty"`
 }
 
 type BankAccount struct {
@@ -110,6 +120,30 @@ type BankAccount struct {
 
 	BankCode     string `json:"bank_code,omitempty"`
 	CurrencyCode int    `json:"currency_code,omitempty"`
+}
+
+type Payment struct {
+	Id              string  `json:"id,omitempty"`
+	TeamId          string  `json:"team_id,omitempty"`
+	BankId          int     `json:"bank_id,omitempty"`
+	Amount          float64 `json:"amount,omitempty"`
+	PaymentStatusId int     `json:"payment_status_id,omitempty"`
+	CurrencyId      int     `json:"currency_id,omitempty"`
+
+	BankCode     string `json:"bank_code,omitempty"`
+	CurrencyCode int    `json:"currency_code,omitempty"`
+}
+
+type TransactionStatus struct {
+	TransactionId string `json:"transaction_id,omitempty"`
+	TeamId        string `json:"team_id,omitempty"`
+	StatusId      int    `json:"status_id,omitempty"`
+}
+
+type BankAccountBalance struct {
+	Number  string `json:"number,omitempty"`
+	TeamId  string `json:"team_id,omitempty"`
+	Balance int    `json:"balance,omitempty"`
 }
 
 type Contractor struct {
