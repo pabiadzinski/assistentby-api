@@ -138,7 +138,7 @@ type Payment struct {
 type TransactionStatus struct {
 	TransactionId string `json:"transaction_id,omitempty"`
 	TeamId        string `json:"team_id,omitempty"`
-	StatusId      int    `json:"status_id,omitempty"`
+	Status        string `json:"status,omitempty"`
 }
 
 type BankAccountBalance struct {
