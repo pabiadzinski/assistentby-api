@@ -104,6 +104,7 @@ type Operation struct {
 	UpdatedAt       *string `json:"updated_at,omitempty"`
 
 	BankAccountNumber string `json:"bank_account_number,omitempty"`
+	UIN               string `json:"uin"`
 }
 
 type BankAccount struct {
@@ -119,7 +120,7 @@ type BankAccount struct {
 	OpeningBalanceDate string  `json:"opening_balance_date,omitempty"`
 
 	BankCode     string `json:"bank_code,omitempty"`
-	CurrencyCode int    `json:"currency_code,omitempty"`
+	CurrencyCode string `json:"currency_code,omitempty"`
 }
 
 type Payment struct {

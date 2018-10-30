@@ -115,8 +115,8 @@ const (
 	getRoles     method = "roles"
 	getConstants method = "constants"
 
-	updateTransactionStatus  method = "transactions/status"
-	updateBankAccountBalance method = "bank-accounts/balance"
+	updateTransactionStatus  method = "sync/transactions/status"
+	updateBankAccountBalance method = "sync/bank-accounts/balance"
 )
 
 type Doer interface {

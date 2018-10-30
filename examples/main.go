@@ -30,7 +30,7 @@ func main() {
 		Description:     "Описание платежа",
 		OperationTypeId: a.OperationIncomeID,
 		OperationFlowId: a.OperationFlowBankID,
-		CurrencyId:      8,
+		CurrencyId:      "8",
 		TransactionId:   "123",
 	}
 
