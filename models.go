@@ -130,6 +130,7 @@ type BankAccount struct {
 
 type Payment struct {
 	Id              string  `json:"id,omitempty"`
+	Date            string  `json:"date"`
 	Number          string  `json:"number"`
 	TeamId          string  `json:"team_id,omitempty"`
 	BankId          int     `json:"bank_id,omitempty"`
