@@ -213,6 +213,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[getVatRates] = fmt.Sprint(baseURI, "/", string(getVatRates), string(teamId))
 
 	list[storeOperation] = fmt.Sprint(baseURI, "/", string(storeOperation))
+	list[storePayment] = fmt.Sprint(baseURI, "/", string(storePayment))
 	list[updateOperation] = fmt.Sprint(baseURI, "/", string(updateOperation))
 	list[storeBankAccount] = fmt.Sprint(baseURI, "/", string(storeBankAccount))
 	list[updateBankAccount] = fmt.Sprint(baseURI, "/", string(updateBankAccount))

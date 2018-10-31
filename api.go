@@ -158,3 +158,15 @@ func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) *AccountB
 
 	return response
 }
+
+func (api *ApiAssistent) StorePayment(form Payment) interface{} {
+	response := &PaymentResponse{}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(storePayment), form)
+
+	failOnError(err, "create payment")
+
+	json.Unmarshal(req, response)
+
+	return response
+}

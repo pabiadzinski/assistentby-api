@@ -63,6 +63,11 @@ type PaymentStatusResponse struct {
 	MetaResponse `json:"meta"`
 }
 
+type PaymentResponse struct {
+	Data         Payment `json:"data"`
+	MetaResponse `json:"meta"`
+}
+
 type AccountBalanceResponse struct {
 	Data         BankAccount `json:"data"`
 	MetaResponse `json:"meta"`
