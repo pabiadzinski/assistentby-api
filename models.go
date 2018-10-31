@@ -137,6 +137,7 @@ type Payment struct {
 	Amount          float64 `json:"amount,omitempty"`
 	PaymentStatusId int     `json:"payment_status_id,omitempty"`
 	CurrencyId      int     `json:"currency_id,omitempty"`
+	Subject         string  `json:"subject"`
 
 	BankCode     string `json:"bank_code,omitempty"`
 	CurrencyCode string `json:"currency_code,omitempty"`
