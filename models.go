@@ -137,7 +137,7 @@ type Payment struct {
 	CurrencyId      int     `json:"currency_id,omitempty"`
 
 	BankCode     string `json:"bank_code,omitempty"`
-	CurrencyCode int    `json:"currency_code,omitempty"`
+	CurrencyCode string `json:"currency_code,omitempty"`
 }
 
 type TransactionStatus struct {
