@@ -6,8 +6,16 @@ const (
 )
 
 const (
-	OperationFlowBankID = iota + 1
-	OperationFlowCashID
+	OperationFlowCashID = iota + 1
+	OperationFlowBankID
+)
+
+const (
+	PaymentStatusUnconfirmed = "unconfirmed"
+	PaymentStatusConfirmed   = "confirmed"
+	PaymentStatusConducted   = "conducted"
+	PaymentStatusRejected    = "rejected"
+	PaymentStatusProcessing  = "processing"
 )
 
 type MetaResponse struct {
