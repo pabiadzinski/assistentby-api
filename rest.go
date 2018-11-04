@@ -152,12 +152,20 @@ func (c *ClientApi) validateResponse(res *http.Response) ([]byte, error) {
 		return nil, errors.New("response is not json")
 	}
 
-	if res.StatusCode > 201 {
-		body, _ := ioutil.ReadAll(res.Body)
+	if res.StatusCode == 400 {
+		return nil, errors.New("bad request")
+	}
 
-		log.Println(string(body))
+	if res.StatusCode == 403 {
+		return nil, errors.New("auth error or team_id is missing")
+	}
 
+	if res.StatusCode == 422 {
 		return nil, errors.New("validation response error")
+	}
+
+	if res.StatusCode >= 500 {
+		return nil, errors.New("server error")
 	}
 
 	body, err := ioutil.ReadAll(res.Body)

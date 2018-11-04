@@ -11,7 +11,7 @@ type ApiAssistent struct {
 	C ClientApi
 }
 
-func (api *ApiAssistent) GetOperations(params string) interface{} {
+func (api *ApiAssistent) GetOperations(params string) (*ApiResponse, error) {
 	response := &ApiResponse{Data: []Operation{}}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getOperations), params)
@@ -20,13 +20,10 @@ func (api *ApiAssistent) GetOperations(params string) interface{} {
 
 	json.Unmarshal(req, response)
 
-	//fmt.Println(reflect.TypeOf(response))
-	//fmt.Printf("%+v\n", response)
-
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) GetProfile(params string) interface{} {
+func (api *ApiAssistent) GetProfile(params string) (*Profile, error) {
 	response := &Profile{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getProfile), params)
@@ -35,10 +32,10 @@ func (api *ApiAssistent) GetProfile(params string) interface{} {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) StoreOperation(form Operation) interface{} {
+func (api *ApiAssistent) StoreOperation(form Operation) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Operation{}}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeOperation), form)
@@ -47,10 +44,10 @@ func (api *ApiAssistent) StoreOperation(form Operation) interface{} {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) UpdateOperation(form Operation, id string) interface{} {
+func (api *ApiAssistent) UpdateOperation(form Operation, id string) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Operation{}}
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateOperation), id), form)
@@ -59,10 +56,10 @@ func (api *ApiAssistent) UpdateOperation(form Operation, id string) interface{} 
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) StoreBankAccount(form BankAccount) *BankAccountResponse {
+func (api *ApiAssistent) StoreBankAccount(form BankAccount) (*BankAccountResponse, error) {
 	response := &BankAccountResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
@@ -71,10 +68,10 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) *BankAccountResponse
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) *BankAccountResponse {
+func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) (*BankAccountResponse, error) {
 	response := &BankAccountResponse{}
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateBankAccount), id), form)
@@ -83,10 +80,10 @@ func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) *BankAcc
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
+func (api *ApiAssistent) StoreContractor(form Contractor) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Contractor{}}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeContractor), form)
@@ -95,10 +92,10 @@ func (api *ApiAssistent) StoreContractor(form Contractor) interface{} {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) GetCurrencies(params string) *CurrencyResponse {
+func (api *ApiAssistent) GetCurrencies(params string) (*CurrencyResponse, error) {
 	response := &CurrencyResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getCurrencies), params)
@@ -107,10 +104,10 @@ func (api *ApiAssistent) GetCurrencies(params string) *CurrencyResponse {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) GetBanks(params string) *BankResponse {
+func (api *ApiAssistent) GetBanks(params string) (*BankResponse, error) {
 	response := &BankResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getBanks), params)
@@ -119,10 +116,10 @@ func (api *ApiAssistent) GetBanks(params string) *BankResponse {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) GetContractorDataByInn(inn string) *UzContractorResponse {
+func (api *ApiAssistent) GetContractorDataByInn(inn string) (*UzContractorResponse, error) {
 	response := &UzContractorResponse{}
 
 	url := "http://services.officebank.uz/api/officebank/contractors/" + inn
@@ -130,12 +127,13 @@ func (api *ApiAssistent) GetContractorDataByInn(inn string) *UzContractorRespons
 	req, err := api.C.getRequest(url, "")
 
 	failOnError(err, "uz contractor")
+
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) *PaymentStatusResponse {
+func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) (*PaymentStatusResponse, error) {
 	response := &PaymentStatusResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(updateTransactionStatus), form)
@@ -144,10 +142,10 @@ func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) *Paymen
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) *AccountBalanceResponse {
+func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) (*AccountBalanceResponse, error) {
 	response := &AccountBalanceResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(updateBankAccountBalance), form)
@@ -156,10 +154,10 @@ func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) *AccountB
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
 
-func (api *ApiAssistent) StorePayment(form Payment) interface{} {
+func (api *ApiAssistent) StorePayment(form Payment) (*PaymentResponse, error) {
 	response := &PaymentResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storePayment), form)
@@ -168,5 +166,5 @@ func (api *ApiAssistent) StorePayment(form Payment) interface{} {
 
 	json.Unmarshal(req, response)
 
-	return response
+	return response, err
 }
