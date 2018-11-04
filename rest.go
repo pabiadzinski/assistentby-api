@@ -156,6 +156,10 @@ func (c *ClientApi) validateResponse(res *http.Response) ([]byte, error) {
 		return nil, errors.New("bad request")
 	}
 
+	if res.StatusCode == 401 {
+		return nil, errors.New("unauthorized")
+	}
+
 	if res.StatusCode == 403 {
 		return nil, errors.New("auth error or team_id is missing")
 	}
