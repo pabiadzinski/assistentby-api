@@ -168,3 +168,14 @@ func (api *ApiAssistent) StorePayment(form Payment) (*PaymentResponse, error) {
 
 	return response, err
 }
+
+func (api *ApiAssistent) UpdateTeam(form Team, id string) (*TeamResponse, error) {
+	response := &TeamResponse{}
+
+	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateTeam), id), form)
+	failOnError(err, "update team")
+
+	json.Unmarshal(req, response)
+
+	return response, err
+}

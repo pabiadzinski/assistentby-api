@@ -85,6 +85,10 @@ type UzContractorResponse struct {
 	Data UzContractor `json:"data"`
 }
 
+type TeamResponse struct {
+	Data Team `json:"data"`
+}
+
 type Profile struct {
 	Id         int         `json:"id"`
 	Name       string      `json:"name"`
@@ -97,6 +101,7 @@ type Profile struct {
 type Team struct {
 	Id   int    `json:"id"`
 	Name string `json:"name"`
+	UIN  string `json:"uin"`
 }
 
 type Operation struct {

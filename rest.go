@@ -88,6 +88,7 @@ const (
 	getTeamWidgetToggle method = "teams/{id}/widgets/toggle"
 	getTeamRequsisites  method = "teams/{id}/requisites"
 	getTeamImages       method = "teams/{id}/images"
+	updateTeam          method = "teams/{id}"
 
 	getTaxDepartments       method = "tax-departments"
 	getSocialDepartments    method = "social-departments"
@@ -232,6 +233,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[storeContractor] = fmt.Sprint(baseURI, "/", string(storeContractor))
 	list[updateTransactionStatus] = fmt.Sprint(baseURI, "/", string(updateTransactionStatus))
 	list[updateBankAccountBalance] = fmt.Sprint(baseURI, "/", string(updateBankAccountBalance))
+	list[updateTeam] = fmt.Sprint(baseURI, "/", string(updateTeam))
 
 	return list
 }
@@ -265,10 +267,10 @@ func (c *ClientApi) postRequest(url string, postData interface{}) ([]byte, error
 func (c *ClientApi) putRequest(url string, putData interface{}) ([]byte, error) {
 	j, _ := json.Marshal(putData)
 	form := bytes.NewBuffer(j)
-	log.Print(url, form)
+
 	req, err := http.NewRequest("PUT", url, form)
 
-	req.Header.Set("Content-type", "application/json")
+	req.Header.Set("Content-type", "application/x-www-form-urlencoded")
 	req.Header.Set("Authorization", c.token)
 
 	response, err := c.c.Do(req)
