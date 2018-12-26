@@ -110,7 +110,23 @@ type Operation struct {
 	Description     string  `json:"description,omitempty"`
 	OperationTypeId int     `json:"operation_type_id"`
 	OperationFlowId int     `json:"operation_flow_id,omitempty"`
-	CurrencyCode    int     `json:"currency_code"` //usz sum
+	CurrencyId      string  `json:"currency_id"`
+	TransactionId   string  `json:"transaction_id,omitempty"`
+	CreatedBy       *string `json:"created_by,omitempty"`
+	CreatedAt       *string `json:"created_at,omitempty"`
+	UpdatedAt       *string `json:"updated_at,omitempty"`
+}
+
+type Transaction struct {
+	Id              string  `json:"id"`
+	TeamId          string  `json:"team_id,omitempty"`
+	Date            string  `json:"date"`
+	AmountIn        float32 `json:"amount_in,omitempty"`
+	AmountOut       float32 `json:"amount_out,omitempty"`
+	PaymentDocument string  `json:"payment_document"`
+	Description     string  `json:"description,omitempty"`
+	OperationTypeId int     `json:"operation_type_id"`
+	OperationFlowId int     `json:"operation_flow_id,omitempty"`
 	CurrencyId      string  `json:"currency_id"`
 	TransactionId   string  `json:"transaction_id,omitempty"`
 	CreatedBy       *string `json:"created_by,omitempty"`
@@ -119,6 +135,8 @@ type Operation struct {
 
 	BankAccountNumber string `json:"bank_account_number,omitempty"`
 	UIN               string `json:"uin"`
+	Status            int    `json:"status"`
+	CurrencyCode      int    `json:"currency_code"`
 }
 
 type BankAccount struct {
