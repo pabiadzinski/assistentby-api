@@ -119,20 +119,6 @@ func (api *ApiAssistent) GetBanks(params string) (*BankResponse, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) GetContractorDataByInn(inn string) (*UzContractorResponse, error) {
-	response := &UzContractorResponse{}
-
-	url := "http://services.officebank.uz/api/officebank/contractors/" + inn
-
-	req, err := api.C.getRequest(url, "")
-
-	failOnError(err, "uz contractor")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
 func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) (*PaymentStatusResponse, error) {
 	response := &PaymentStatusResponse{}
 
@@ -174,6 +160,18 @@ func (api *ApiAssistent) UpdateTeam(form Team, id string) (*TeamResponse, error)
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateTeam), id), form)
 	failOnError(err, "update team")
+
+	json.Unmarshal(req, response)
+
+	return response, err
+}
+
+func (api *ApiAssistent) StoreTransaction(form Operation) (*ApiResponse, error) {
+	response := &ApiResponse{Data: Operation{}}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(storeTransaction), form)
+
+	failOnError(err, "Create transaction")
 
 	json.Unmarshal(req, response)
 

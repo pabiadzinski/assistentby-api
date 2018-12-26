@@ -116,6 +116,7 @@ const (
 	getRoles     method = "roles"
 	getConstants method = "constants"
 
+	storeTransaction         method = "sync/transactions"
 	updateTransactionStatus  method = "sync/transactions/status"
 	updateBankAccountBalance method = "sync/bank-accounts/balance"
 )
@@ -234,6 +235,8 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[updateTransactionStatus] = fmt.Sprint(baseURI, "/", string(updateTransactionStatus))
 	list[updateBankAccountBalance] = fmt.Sprint(baseURI, "/", string(updateBankAccountBalance))
 	list[updateTeam] = fmt.Sprint(baseURI, "/", string(updateTeam))
+
+	list[storeTransaction] = fmt.Sprint(baseURI, "/", string(storeTransaction))
 
 	return list
 }
