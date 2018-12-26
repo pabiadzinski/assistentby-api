@@ -166,8 +166,8 @@ func (api *ApiAssistent) UpdateTeam(form Team, id string) (*TeamResponse, error)
 	return response, err
 }
 
-func (api *ApiAssistent) StoreTransaction(form Operation) (*ApiResponse, error) {
-	response := &ApiResponse{Data: Operation{}}
+func (api *ApiAssistent) StoreTransaction(form Transaction) (*ApiResponse, error) {
+	response := &ApiResponse{Data: Transaction{}}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeTransaction), form)
 
