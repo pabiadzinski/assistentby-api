@@ -136,9 +136,9 @@ type Transaction struct {
 	BankAccountNumber string `json:"bank_account_number,omitempty"`
 	UIN               string `json:"uin"`
 	Status            int    `json:"status"`
+	StatusDescription string `json:"status_description"`
 	CurrencyCode      int    `json:"currency_code"`
 	PurposeCode       string `json:"purpose_code"`
-	Purpose           string `json:"purpose"`
 }
 
 type BankAccount struct {
