@@ -123,15 +123,15 @@ type Transaction struct {
 	Date            string  `json:"date"`
 	AmountIn        float32 `json:"amount_in,omitempty"`
 	AmountOut       float32 `json:"amount_out,omitempty"`
+	Amount          float32 `json:"amount,omitempty"`
 	PaymentDocument string  `json:"payment_document"`
 	Description     string  `json:"description,omitempty"`
 	OperationTypeId int     `json:"operation_type_id"`
 	OperationFlowId int     `json:"operation_flow_id,omitempty"`
 	CurrencyId      string  `json:"currency_id"`
 	TransactionId   string  `json:"transaction_id,omitempty"`
-	CreatedBy       *string `json:"created_by,omitempty"`
-	CreatedAt       *string `json:"created_at,omitempty"`
-	UpdatedAt       *string `json:"updated_at,omitempty"`
+	BankId          int     `json:"bank_id,omitempty"`
+	Number          string  `json:"number,omitempty"`
 
 	BankAccountNumber string `json:"bank_account_number,omitempty"`
 	UIN               string `json:"uin"`
