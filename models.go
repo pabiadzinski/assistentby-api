@@ -137,7 +137,7 @@ type Transaction struct {
 	UIN               string `json:"uin"`
 	Status            int    `json:"status"`
 	CurrencyCode      int    `json:"currency_code"`
-	PurposeCode       int    `json:"purpose_code"`
+	PurposeCode       string `json:"purpose_code"`
 }
 
 type BankAccount struct {
