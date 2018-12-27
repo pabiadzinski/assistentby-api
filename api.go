@@ -71,6 +71,18 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) (*BankAccountRespons
 	return response, err
 }
 
+func (api *ApiAssistent) SyncBankAccount(form BankAccount) (*BankAccountResponse, error) {
+	response := &BankAccountResponse{}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(syncBankAccount), form)
+
+	failOnError(err, "sync bank account")
+
+	json.Unmarshal(req, response)
+
+	return response, err
+}
+
 func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) (*BankAccountResponse, error) {
 	response := &BankAccountResponse{}
 

@@ -17,6 +17,7 @@ const (
 
 	getBankAccounts   method = "bank-accounts?team_id="
 	storeBankAccount  method = "bank-accounts"
+	syncBankAccount   method = "sync/bank-accounts"
 	updateBankAccount method = "bank-accounts/{id}"
 	deleteBankAccount method = "bank-accounts/{id}"
 
@@ -237,6 +238,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[updateTeam] = fmt.Sprint(baseURI, "/", string(updateTeam))
 
 	list[storeTransaction] = fmt.Sprint(baseURI, "/", string(storeTransaction))
+	list[syncBankAccount] = fmt.Sprint(baseURI, "/", string(syncBankAccount))
 
 	return list
 }
