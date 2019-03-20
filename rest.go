@@ -240,6 +240,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 
 	list[storeTransaction] = fmt.Sprint(baseURI, "/", string(storeTransaction))
 	list[syncBankAccount] = fmt.Sprint(baseURI, "/", string(syncBankAccount))
+	list[syncEmployees] = fmt.Sprint(baseURI, "/", string(syncEmployees))
 
 	return list
 }
