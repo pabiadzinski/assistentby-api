@@ -189,3 +189,15 @@ func (api *ApiAssistent) StoreTransaction(form Transaction) (*ApiResponse, error
 
 	return response, err
 }
+
+func (api *ApiAssistent) SyncEmployees(form interface{}) (*ApiResponse, error) {
+	response := &ApiResponse{Data: []Employee{}}
+
+	req, err := api.C.postRequest(api.C.getEndpoint(syncEmployees), form)
+
+	failOnError(err, "Sync employees")
+
+	json.Unmarshal(req, response)
+
+	return response, err
+}

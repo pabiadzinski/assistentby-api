@@ -120,6 +120,7 @@ const (
 	storeTransaction         method = "sync/transactions"
 	updateTransactionStatus  method = "sync/transactions/status"
 	updateBankAccountBalance method = "sync/bank-accounts/balance"
+	syncEmployees            method = "sync/employees"
 )
 
 type Doer interface {

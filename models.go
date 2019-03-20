@@ -220,3 +220,22 @@ type Currency struct {
 	Code     string `json:"code"`
 	CodeName string `json:"code_name"`
 }
+
+type SalaryEmployee struct {
+	BankAccount string `json:"bank_account"`
+}
+
+type Employee struct {
+	Id             string `json:"id,omitempty"`
+	TeamId         string `json:"team_id"`
+	FistName       string `json:"fist_name"`
+	MiddleName     string `json:"middle_name"`
+	LastName       string `json:"last_name"`
+	PassportNumber string `json:"passport_number"`
+	PassportSeries string `json:"passport_series"`
+	PersonalCode   string `json:"personal_code"`
+	Position       string `json:"position"`
+	Salary         string `json:"salary"`
+	TariffRate     string `json:"tariff_rate"`
+	BankAccount    string `json:"bank_account"`
+}
