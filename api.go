@@ -7,11 +7,11 @@ import (
 
 const BaseApiUrl = "https://app.assistent.by/api/v1"
 
-type ApiAssistent struct {
+type Api struct {
 	C ClientApi
 }
 
-func (api *ApiAssistent) GetOperations(params string) (*ApiResponse, error) {
+func (api *Api) GetOperations(params string) (*ApiResponse, error) {
 	response := &ApiResponse{Data: []Operation{}}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getOperations), params)
@@ -23,7 +23,7 @@ func (api *ApiAssistent) GetOperations(params string) (*ApiResponse, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) GetProfile(params string) (*Profile, error) {
+func (api *Api) GetProfile(params string) (*Profile, error) {
 	response := &Profile{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getProfile), params)
@@ -35,7 +35,7 @@ func (api *ApiAssistent) GetProfile(params string) (*Profile, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) StoreOperation(form Operation) (*ApiResponse, error) {
+func (api *Api) StoreOperation(form Operation) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Operation{}}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeOperation), form)
@@ -47,7 +47,7 @@ func (api *ApiAssistent) StoreOperation(form Operation) (*ApiResponse, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) UpdateOperation(form Operation, id string) (*ApiResponse, error) {
+func (api *Api) UpdateOperation(form Operation, id string) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Operation{}}
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateOperation), id), form)
@@ -59,7 +59,7 @@ func (api *ApiAssistent) UpdateOperation(form Operation, id string) (*ApiRespons
 	return response, err
 }
 
-func (api *ApiAssistent) StoreBankAccount(form BankAccount) (*BankAccountResponse, error) {
+func (api *Api) StoreBankAccount(form BankAccount) (*BankAccountResponse, error) {
 	response := &BankAccountResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeBankAccount), form)
@@ -71,19 +71,7 @@ func (api *ApiAssistent) StoreBankAccount(form BankAccount) (*BankAccountRespons
 	return response, err
 }
 
-func (api *ApiAssistent) SyncBankAccount(form BankAccount) (*BankAccountResponse, error) {
-	response := &BankAccountResponse{}
-
-	req, err := api.C.postRequest(api.C.getEndpoint(syncBankAccount), form)
-
-	failOnError(err, "sync bank account")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
-func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) (*BankAccountResponse, error) {
+func (api *Api) UpdateBankAccount(form BankAccount, id string) (*BankAccountResponse, error) {
 	response := &BankAccountResponse{}
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateBankAccount), id), form)
@@ -95,7 +83,7 @@ func (api *ApiAssistent) UpdateBankAccount(form BankAccount, id string) (*BankAc
 	return response, err
 }
 
-func (api *ApiAssistent) StoreContractor(form Contractor) (*ApiResponse, error) {
+func (api *Api) StoreContractor(form Contractor) (*ApiResponse, error) {
 	response := &ApiResponse{Data: Contractor{}}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storeContractor), form)
@@ -107,7 +95,7 @@ func (api *ApiAssistent) StoreContractor(form Contractor) (*ApiResponse, error) 
 	return response, err
 }
 
-func (api *ApiAssistent) GetCurrencies(params string) (*CurrencyResponse, error) {
+func (api *Api) GetCurrencies(params string) (*CurrencyResponse, error) {
 	response := &CurrencyResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getCurrencies), params)
@@ -119,7 +107,7 @@ func (api *ApiAssistent) GetCurrencies(params string) (*CurrencyResponse, error)
 	return response, err
 }
 
-func (api *ApiAssistent) GetBanks(params string) (*BankResponse, error) {
+func (api *Api) GetBanks(params string) (*BankResponse, error) {
 	response := &BankResponse{}
 
 	req, err := api.C.getRequest(api.C.getEndpoint(getBanks), params)
@@ -131,31 +119,7 @@ func (api *ApiAssistent) GetBanks(params string) (*BankResponse, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) UpdateTransactionStatus(form TransactionStatus) (*PaymentStatusResponse, error) {
-	response := &PaymentStatusResponse{}
-
-	req, err := api.C.postRequest(api.C.getEndpoint(updateTransactionStatus), form)
-
-	failOnError(err, "update transaction status")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
-func (api *ApiAssistent) UpdateAccountBalance(form BankAccountBalance) (*AccountBalanceResponse, error) {
-	response := &AccountBalanceResponse{}
-
-	req, err := api.C.postRequest(api.C.getEndpoint(updateBankAccountBalance), form)
-
-	failOnError(err, "update account balance")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
-func (api *ApiAssistent) StorePayment(form Payment) (*PaymentResponse, error) {
+func (api *Api) StorePayment(form Payment) (*PaymentResponse, error) {
 	response := &PaymentResponse{}
 
 	req, err := api.C.postRequest(api.C.getEndpoint(storePayment), form)
@@ -167,35 +131,11 @@ func (api *ApiAssistent) StorePayment(form Payment) (*PaymentResponse, error) {
 	return response, err
 }
 
-func (api *ApiAssistent) UpdateTeam(form Team, id string) (*TeamResponse, error) {
+func (api *Api) UpdateTeam(form Team, id string) (*TeamResponse, error) {
 	response := &TeamResponse{}
 
 	req, err := api.C.putRequest(replaceId(api.C.getEndpoint(updateTeam), id), form)
 	failOnError(err, "update team")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
-func (api *ApiAssistent) StoreTransaction(form Transaction) (*ApiResponse, error) {
-	response := &ApiResponse{Data: Transaction{}}
-
-	req, err := api.C.postRequest(api.C.getEndpoint(storeTransaction), form)
-
-	failOnError(err, "Create transaction")
-
-	json.Unmarshal(req, response)
-
-	return response, err
-}
-
-func (api *ApiAssistent) SyncEmployees(form interface{}) (*ApiResponse, error) {
-	response := &ApiResponse{Data: []Employee{}}
-
-	req, err := api.C.postRequest(api.C.getEndpoint(syncEmployees), form)
-
-	failOnError(err, "Sync employees")
 
 	json.Unmarshal(req, response)
 

@@ -17,7 +17,6 @@ const (
 
 	getBankAccounts   method = "bank-accounts?team_id="
 	storeBankAccount  method = "bank-accounts"
-	syncBankAccount   method = "sync/bank-accounts"
 	updateBankAccount method = "bank-accounts/{id}"
 	deleteBankAccount method = "bank-accounts/{id}"
 
@@ -87,7 +86,7 @@ const (
 	getTeams            method = "teams?team_id="
 	getTeamIntegrations method = "teams/{id}/integrations"
 	getTeamWidgetToggle method = "teams/{id}/widgets/toggle"
-	getTeamRequsisites  method = "teams/{id}/requisites"
+	getTeamRequisites   method = "teams/{id}/requisites"
 	getTeamImages       method = "teams/{id}/images"
 	updateTeam          method = "teams/{id}"
 
@@ -116,11 +115,6 @@ const (
 
 	getRoles     method = "roles"
 	getConstants method = "constants"
-
-	storeTransaction         method = "sync/transactions"
-	updateTransactionStatus  method = "sync/transactions/status"
-	updateBankAccountBalance method = "sync/bank-accounts/balance"
-	syncEmployees            method = "sync/employees"
 )
 
 type Doer interface {
@@ -234,13 +228,7 @@ func createEndpoints(baseURI string, teamId string) map[method]string {
 	list[storeBankAccount] = fmt.Sprint(baseURI, "/", string(storeBankAccount))
 	list[updateBankAccount] = fmt.Sprint(baseURI, "/", string(updateBankAccount))
 	list[storeContractor] = fmt.Sprint(baseURI, "/", string(storeContractor))
-	list[updateTransactionStatus] = fmt.Sprint(baseURI, "/", string(updateTransactionStatus))
-	list[updateBankAccountBalance] = fmt.Sprint(baseURI, "/", string(updateBankAccountBalance))
 	list[updateTeam] = fmt.Sprint(baseURI, "/", string(updateTeam))
-
-	list[storeTransaction] = fmt.Sprint(baseURI, "/", string(storeTransaction))
-	list[syncBankAccount] = fmt.Sprint(baseURI, "/", string(syncBankAccount))
-	list[syncEmployees] = fmt.Sprint(baseURI, "/", string(syncEmployees))
 
 	return list
 }
